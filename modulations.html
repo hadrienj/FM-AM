@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="viewport" content="width=device-width,
+            height=device-height, user-scalable=no" />
+        <title>Modulations</title>
+
+        <link rel="stylesheet"
+            href="http://localhost:8080/libs/css/jquery.mobile-1.4.5.min.css">
+        <link rel="stylesheet"
+            href="http://localhost:8080/style.css">
+
+        <script src="http://localhost:8080/libs/js/chroma.min.js"></script>
+        <script src="http://localhost:8080/libs/js/jquery-1.11.2.js"></script>
+        <script src="http://localhost:8080/libs/js/jquery.mobile-1.4.5.min.js"></script>
+        <script src="http://localhost:8080/modulations.js"></script>
+
+    </head>
+
+
+<body>
+	<canvas id="canvas" width="800" height="256" ></canvas>
+	<div class="ui-grid-c">
+		<div id="AMButton" class="ui-block-a">
+		    <button id="AM" class="ui-btn ui-btn-inline
+		    ui-corner-all ui-shadow">AM
+		    </button>
+		</div>
+		<div id="carFreqSlider" class="ui-block-b">
+		    <label for="carFreq">Carrier Frequency</label>
+		    <input type="range" name="carFreq" id="carFreq"
+		value="300" min="30" max="5000" step ="10" data-highlight="true"/>
+		</div>
+		<div id="modAmplSlider" class="ui-block-c">
+		    <label for="modAmpl">Modulation depth</label>
+		    <input type="range" name="modAmpl" id="modAmpl"
+		value="100" min="0" max="1000" step ="10" data-highlight="true"/>
+		</div>
+		<div id="modFreqSlider" class="ui-block-d">
+		    <label for="modFreq">Modulator frequency</label>
+		    <input type="range" name="modFreq" id="modFreq"
+		value="2" min="0" max="5000" step ="1" data-highlight="true"/>
+		</div>
+	</div>
+
+	<div id="FMButton">
+	    <button id="FM" class="ui-btn ui-btn-inline
+	    ui-corner-all ui-shadow">FM
+	    </button>
+	</div>
+	<div id="stopButt">
+	    <button id="stop" class="ui-btn ui-btn-inline
+	    ui-corner-all ui-shadow">Stop
+	    </button>
+	</div>
+
+</body>
+</html>
+
