@@ -23,7 +23,6 @@ function handler (request, response) {
   // serve static files
   request.addListener('end', function () {
       staticFiles.serve(request, response);
-      console.log('static');
   }).resume();
 }
 

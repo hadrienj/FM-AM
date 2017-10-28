@@ -9,10 +9,15 @@
     "jquery-mobile": "^1.5.0-alpha.1",
     "node-static": "^0.7.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-loader": "^7.1.2",
+    "webpack": "^3.8.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "babel": "babel --presets es2015 js/main.js -o build/main.bundle.js",
+    "webpack": "webpack -d --watch"
   },
   "repository": {
     "type": "git",
