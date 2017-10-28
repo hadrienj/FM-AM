@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-
 var modulations = {
     play: false,
     column: 0,
