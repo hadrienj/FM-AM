@@ -19,7 +19,9 @@ function handler (req, res) {
   });
 }
 
-app.listen(port);
+app.listen(port, function() {
+    console.log('Our app is running on http://localhost:' + port);
+});
 
 
 // Create a node-static server instance to serve the './static' folder
