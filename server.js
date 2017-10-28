@@ -6,7 +6,7 @@ var app = require('http').createServer(handler),
 
 // handle web server
 function handler (req, res) {
-  fs.readFile(__dirname + '/modulations.html',
+  fs.readFile(__dirname + '/index.html',
   function (err, data) {
     if (err) {
       res.writeHead(500);
