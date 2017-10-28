@@ -2,7 +2,9 @@ var app = require('http').createServer(handler),
   fs = require('fs'),
   static = require('node-static');
 
-
+// set the port of our application
+// process.env.PORT lets the port be set by Heroku
+var port = process.env.PORT || 8080;
 
 // handle web server
 function handler (req, res) {
@@ -17,8 +19,7 @@ function handler (req, res) {
   });
 }
 
-// creating the server ( localhost:8000 )
-app.listen(8000);
+app.listen(port);
 
 
 // Create a node-static server instance to serve the './static' folder
@@ -31,4 +32,4 @@ require('http').createServer(function (request, response) {
         //
         staticFiles.serve(request, response);
     }).resume();
-}).listen(8080);
+}).listen(port);
