@@ -13,6 +13,7 @@
         <link rel="stylesheet"
             href="http://localhost:8080/style.css">
 
+        <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script src="http://localhost:8080/libs/js/chroma.min.js"></script>
         <script src="http://localhost:8080/libs/js/jquery-1.11.2.js"></script>
         <script src="http://localhost:8080/libs/js/jquery.mobile-1.4.5.min.js"></script>
@@ -24,10 +25,17 @@
 <body>
 	<canvas id="canvas" width="800" height="256" ></canvas>
 	<div class="ui-grid-c">
-		<div id="AMButton" class="ui-block-a">
-		    <button id="AM" class="ui-btn ui-btn-inline
-		    ui-corner-all ui-shadow">AM
-		    </button>
+		<div class="ui-block-a">
+			<div id="AMButton">
+			    <button id="AM" class="ui-btn ui-btn-inline
+			    ui-corner-all ui-shadow">AM
+			    </button>
+			</div>
+			<div id="FMButton">
+			    <button id="FM" class="ui-btn ui-btn-inline
+			    ui-corner-all ui-shadow">FM
+			    </button>
+			</div>
 		</div>
 		<div id="carFreqSlider" class="ui-block-b">
 		    <label for="carFreq">Carrier Frequency</label>
@@ -46,16 +54,13 @@
 		</div>
 	</div>
 
-	<div id="FMButton">
-	    <button id="FM" class="ui-btn ui-btn-inline
-	    ui-corner-all ui-shadow">FM
-	    </button>
-	</div>
 	<div id="stopButt">
 	    <button id="stop" class="ui-btn ui-btn-inline
 	    ui-corner-all ui-shadow">Stop
 	    </button>
 	</div>
+
+	<div class='chart'></div>
 
 </body>
 </html>

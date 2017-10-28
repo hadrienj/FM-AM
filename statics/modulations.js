@@ -1,5 +1,102 @@
 $(document).ready(function() {
 
+
+var modulations = {
+    play: false,
+    column: 0,
+    canvasW: 800,
+    canvasH: 256,
+    fftSize: 1024,
+    masterGain: 0.3,
+    FM: function() {
+        // FM Sounds
+        // use the frequency parameter instead and use the gain of the
+        // modulator to set the amplitude of the tremolo
+        masterGain.gain.value = 0.3;
+        var mod = context.createOscillator();
+        var modGain = context.createGain();
+        var car = context.createOscillator();
+        var carGain = context.createGain();
+        modGain.gain.value = modAmpl;
+        mod.frequency.value = modFreq;
+
+        carGain.gain.value = 1;
+        car.frequency.value = carFreq;
+
+        // refresh the values from the sliders
+        setInterval(function() {
+            modGain.gain.value = modAmpl;
+            mod.frequency.value = modFreq;
+            car.frequency.value = carFreq;
+        }, 100);
+
+        mod.start(0);
+        car.start(0);
+
+        mod.connect(modGain);
+        modGain.connect(car.frequency);
+        car.connect(masterGain);
+        masterGain.connect(analyserNode);
+        analyserNode.connect(context.destination);
+        return [mod, car];
+    },
+    AM: function() {
+        // AM Sounds
+        // use the gain parameter of the osc: the value of the modulator
+        // will modify the gain of the osc:
+        masterGain.gain.value = 0.3;
+        var mod = context.createOscillator();
+        var modGain = context.createGain();
+        var car = context.createOscillator();
+        var carGain = context.createGain();
+
+        modGain.gain.value = modAmpl;
+        mod.type = 'sine';
+        mod.frequency.value = modFreq;
+
+        // refresh the values from the sliders
+        setInterval(function() {
+            modGain.gain.value = modAmpl;
+            mod.frequency.value = modFreq;
+            car.frequency.value = carFreq;
+        }, 100);
+
+        carGain.gain.value = 1;
+        car.frequency.value = carFreq;
+
+        mod.connect(modGain);
+        mod.connect(carGain.gain);
+
+        car.connect(carGain);
+        carGain.connect(masterGain);
+        masterGain.connect(analyserNode);
+        analyserNode.connect(context.destination);
+
+        mod.start(0);
+        car.start(0);
+        
+        frequencyArray = new Uint8Array(analyserNode.frequencyBinCount);
+        return [mod, car];
+    },
+    init: function() {
+        // get the context from the canvas to draw on
+        var ctx = $("#canvas").get()[0].getContext("2d");
+        // Uses the chroma.js library by Gregor Aisch to create a color gradient
+        // download from https://github.com/gka/chroma.js
+        var colorScale = new chroma.scale('Spectral').domain([1,0]);
+        var analyserNode = context.createAnalyser();
+        analyserNode.smoothingTimeConstant = 0.0;
+        analyserNode.fftSize = fftSize;
+        // // Create the array for the data values
+        var frequencyArray = new Uint8Array(analyserNode.frequencyBinCount);
+
+        var carFreq = parseInt(document.getElementById('carFreq').value);
+        var modAmpl = parseInt(document.getElementById('modAmpl').value);
+        var modFreq = parseInt(document.getElementById('modFreq').value);
+    }
+};
+
+
 // get the context from the canvas to draw on
 var ctx = $("#canvas").get()[0].getContext("2d");
 var play = false;
@@ -11,6 +108,7 @@ var colorScale = new chroma.scale('Spectral').domain([1,0]);
 var column = 0;
 var canvasWidth  = 800;
 var canvasHeight = 256;
+
 
 
 var fftSize = 1024;
@@ -54,28 +152,44 @@ function drawSpectrogram() {
         clearCanvas();
     }
     animate = requestAnimationFrame(drawSpectrogram);
-};
+}
 function clearCanvas() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-};
+}
 
 
 
-function FM(min, max, slope) {
+function FM() {
     // FM Sounds
     // use the frequency parameter instead and use the gain of the
     // modulator to set the amplitude of the tremolo
-    modGain.gain.value = 10;
-    mod.frequency.value = 1;
+    masterGain.gain.value = 0.3;
+    var mod = context.createOscillator();
+    var modGain = context.createGain();
+    var car = context.createOscillator();
+    var carGain = context.createGain();
+    modGain.gain.value = modAmpl;
+    mod.frequency.value = modFreq;
 
-    carGain.gain.value = 0.1;
-    car.frequency.value = 200;
+    carGain.gain.value = 1;
+    car.frequency.value = carFreq;
+
+    // refresh the values from the sliders
+    setInterval(function() {
+        modGain.gain.value = modAmpl;
+        mod.frequency.value = modFreq;
+        car.frequency.value = carFreq;
+    }, 100);
+
+    mod.start(0);
+    car.start(0);
 
     mod.connect(modGain);
     modGain.connect(car.frequency);
-    osc.connect(oscGain);
-    oscGain.connect(context.destination);
-
+    car.connect(masterGain);
+    masterGain.connect(analyserNode);
+    analyserNode.connect(context.destination);
+    return [mod, car];
 }
 // mod.connect(carGain.gain);
 function AM() {
@@ -111,62 +225,45 @@ function AM() {
     analyserNode.connect(context.destination);
 
     mod.start(0);
-car.start(0);
+    car.start(0);
     
     frequencyArray = new Uint8Array(analyserNode.frequencyBinCount);
-    console.log(frequencyArray)
+    return [mod, car];
 }
-
 
 var masterGain = context.createGain();
 masterGain.gain.value = 0.3;
 
 var animate;
-
-function stopFun() {
-    masterGain.gain.value = 0;
-    cancelAnimationFrame(animate);
-    play=false;
-}
-
-
-// modGain.gain.value = 1;
-// mod.frequency.value = 200;
-// mod.connect(modGain);
-
-// carGain.gain.value = 1;
-// car.frequency.value = 400;
-// car.connect(carGain);
-
-// var masterGain = ctx.createGain();
-// masterGain.gain.value = 0.3;
-// masterGain.connect(ctx.destination);
-
-
-// mod.start(0);
-// car.start(0);
-
-// mod.connect(car.frequency);
-// carGain.connect(masterGain);
-
-
+var AMGain = [];
+var FMGain = [];
 
 $('#FM').on("click", function(e) {
     if (!play) {
-
-    }
-})
-$('#AM').on("click", function(e) {
-    if (!play) {
-        AM();
+        FMGain = FM();
         animate = requestAnimationFrame(drawSpectrogram);
         play = true;
+    } else {
+        FMGain[0].stop(0);
+        FMGain[1].stop(0);
+        play = false;
+        cancelAnimationFrame(animate);
     }
-})
+});
+$('#AM').on("click", function(e) {
+    if (!play) {
+        AMGain = AM();
+        animate = requestAnimationFrame(drawSpectrogram);
+        play = true;
+    } else {
+        AMGain[0].stop(0);
+        AMGain[1].stop(0);
+        play = false;
+        cancelAnimationFrame(animate);
+    }
+});
 $('#stop').on("click", function(e) {
     stopFun();
-    play = false;
-    masterGain.gain = 0;
-})
+});
 
 });
