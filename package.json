@@ -1,0 +1,24 @@
+{
+  "name": "modulations",
+  "version": "1.0.0",
+  "description": "Demonstrate frequency and amplitude modulation in JS",
+  "main": "server.js",
+  "dependencies": {
+    "node-static": "^0.7.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hadrienj/FM-AM.git"
+  },
+  "author": "hadrienj",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hadrienj/FM-AM/issues"
+  },
+  "homepage": "https://github.com/hadrienj/FM-AM#readme"
+}
