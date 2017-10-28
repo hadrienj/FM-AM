@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Page Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="page ./page_core.js"
+		data-init="true">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div id="a" data-nstest-role="page"></div>
+	<div id="b" data-nstest-role="page" data-nstest-theme="e"></div>
+	<div id="c" data-nstest-role="page"></div>
+
+<div>
+	<a href="#" id="enhanced-link"></a>
+</div>
+
+<div data-nstest-enhance="false">
+	<a href="#" id="ignored-link"></a>
+</div>
+</body>
+</html>
