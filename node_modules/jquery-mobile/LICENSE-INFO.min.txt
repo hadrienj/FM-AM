@@ -1,1 +1,0 @@
-/*! jQuery Mobile v@VERSION | Copyright jQuery Foundation, Inc. | jquery.org/license */
