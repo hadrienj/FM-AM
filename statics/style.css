@@ -1,6 +1,52 @@
+body {
+  font-family: "Century Gothic"
+}
+.text {
+  color: #343a40;
+}
+
 #canvas {
+  margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
     display: block;
-    background-color: black;
+    background-color: white;
+    border-style: solid;
+    border-color: #c4e8ee;
+}
+.container {
+  margin-top: 3%;
+}
+
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 3px; /* Specified height */
+    background: #c4e8ee;
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+/* The slider handle (use webkit (Chrome, Opera, Safari, Edge) and moz (Firefox) to override default look) */ 
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 15px; /* Set a specific slider handle width */
+    height: 15px; /* Slider handle height */
+    background: #37adbf;
+    border-radius: 50%;
+    cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #37adbf;
+    cursor: pointer; /* Cursor on hover */
 }
