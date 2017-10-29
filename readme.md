@@ -10,6 +10,6 @@ In [amplitude modulation](https://en.wikipedia.org/wiki/Amplitude_modulation), t
 
 # Frequency modulation (FM)
 
-In [frequency modulation](https://en.wikipedia.org/wiki/Frequency_modulation)
+In [frequency modulation](https://en.wikipedia.org/wiki/Frequency_modulation),
 
 
