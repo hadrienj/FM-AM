@@ -1,5 +1,6 @@
 import { Spectro } from './modules/Spectro'
 import { Audio } from './modules/Audio'
+import 'bootstrap';
 
 $(document).ready(function() {
 
