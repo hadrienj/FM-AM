@@ -16,6 +16,10 @@ export class Audio {
     // FM Sounds
     // use the frequency parameter instead and use the gain of the
     // modulator to set the amplitude of the tremolo
+
+    // Enable audio context after user gesture (see https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio)
+    this.audioCtx.resume();
+
     this.mod = this.audioCtx.createOscillator();
     this.modGain = this.audioCtx.createGain();
     this.car = this.audioCtx.createOscillator();
@@ -46,6 +50,10 @@ export class Audio {
     // AM Sounds
     // use the gain parameter of the osc: the value of the modulator
     // will modify the gain of the osc:
+
+    // Enable audio context after user gesture (see https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio)
+    this.audioCtx.resume();
+
     this.mod = this.audioCtx.createOscillator();
     this.modGain = this.audioCtx.createGain();
     this.car = this.audioCtx.createOscillator();
