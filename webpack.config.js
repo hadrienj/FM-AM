@@ -15,7 +15,7 @@ var webpack = require('webpack');
                  query: {
                      presets: ['es2015']
                  }
-             }
+             },
          ]
      },
      stats: {

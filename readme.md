@@ -2,6 +2,7 @@ Try the [demo](http://fm-am.auditory.fr/) and experience FM and AM through visua
 
 In AM and FM a signal is modulated by another signal named carrier. The demo use two sinusoids as the signal and the carrier. It is possible to experience the effect of changing the frequencies of these two sinusoids in real time.
 
+<<<<<<< HEAD
 ![demo](images/demo.png)
 
 # Amplitude modulation (AM)
@@ -13,3 +14,6 @@ In [amplitude modulation](https://en.wikipedia.org/wiki/Amplitude_modulation), t
 In [frequency modulation](https://en.wikipedia.org/wiki/Frequency_modulation),
 
 
+=======
+![demo](images/demo.png)
+>>>>>>> master
