@@ -12651,33 +12651,36 @@ var Audio = exports.Audio = function () {
       // modulator to set the amplitude of the tremolo
 
       // Enable audio context after user gesture (see https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio)
-      this.audioCtx.resume();
+      this.audioCtx.resume().then(function () {
 
-      this.mod = this.audioCtx.createOscillator();
-      this.modGain = this.audioCtx.createGain();
-      this.car = this.audioCtx.createOscillator();
-      this.carGain = this.audioCtx.createGain();
-      this.modGain.gain.value = this.spectro.modAmpl;
-      this.mod.frequency.value = this.spectro.modFreq;
-
-      this.carGain.gain.value = 1;
-      this.car.frequency.value = this.spectro.carFreq;
-
-      // refresh the values from the sliders
-      setInterval(function () {
+        _this.mod = _this.audioCtx.createOscillator();
+        _this.modGain = _this.audioCtx.createGain();
+        _this.car = _this.audioCtx.createOscillator();
+        _this.carGain = _this.audioCtx.createGain();
         _this.modGain.gain.value = _this.spectro.modAmpl;
         _this.mod.frequency.value = _this.spectro.modFreq;
+
+        _this.carGain.gain.value = 1;
         _this.car.frequency.value = _this.spectro.carFreq;
-      }, 100);
 
-      this.mod.start(0);
-      this.car.start(0);
+        // refresh the values from the sliders
+        setInterval(function () {
+          _this.modGain.gain.value = _this.spectro.modAmpl;
+          _this.mod.frequency.value = _this.spectro.modFreq;
+          _this.car.frequency.value = _this.spectro.carFreq;
+        }, 100);
 
-      this.mod.connect(this.modGain);
-      this.modGain.connect(this.car.frequency);
-      this.car.connect(this.masterGain);
-      this.masterGain.connect(this.spectro.analyserNode);
-      this.spectro.analyserNode.connect(this.audioCtx.destination);
+        _this.mod.start(0);
+        _this.car.start(0);
+
+        _this.mod.connect(_this.modGain);
+        _this.modGain.connect(_this.car.frequency);
+        _this.car.connect(_this.masterGain);
+        _this.masterGain.connect(_this.spectro.analyserNode);
+        _this.spectro.analyserNode.connect(_this.audioCtx.destination);
+      }).catch(function (err) {
+        console.log(err);
+      });
     }
   }, {
     key: 'AM',
@@ -12689,37 +12692,38 @@ var Audio = exports.Audio = function () {
       // will modify the gain of the osc:
 
       // Enable audio context after user gesture (see https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio)
-      this.audioCtx.resume();
+      this.audioCtx.resume().then(function () {
 
-      this.mod = this.audioCtx.createOscillator();
-      this.modGain = this.audioCtx.createGain();
-      this.car = this.audioCtx.createOscillator();
-      this.carGain = this.audioCtx.createGain();
+        _this2.mod = _this2.audioCtx.createOscillator();
+        _this2.modGain = _this2.audioCtx.createGain();
+        _this2.car = _this2.audioCtx.createOscillator();
+        _this2.carGain = _this2.audioCtx.createGain();
 
-      this.modGain.gain.value = this.spectro.modAmpl;
-      this.mod.type = 'sine';
-      this.mod.frequency.value = this.spectro.modFreq;
-
-      // refresh the values from the sliders
-      setInterval(function () {
         _this2.modGain.gain.value = _this2.spectro.modAmpl;
+        _this2.mod.type = 'sine';
         _this2.mod.frequency.value = _this2.spectro.modFreq;
+
+        // refresh the values from the sliders
+        setInterval(function () {
+          _this2.modGain.gain.value = _this2.spectro.modAmpl;
+          _this2.mod.frequency.value = _this2.spectro.modFreq;
+          _this2.car.frequency.value = _this2.spectro.carFreq;
+        }, 100);
+
+        _this2.carGain.gain.value = 1;
         _this2.car.frequency.value = _this2.spectro.carFreq;
-      }, 100);
 
-      this.carGain.gain.value = 1;
-      this.car.frequency.value = this.spectro.carFreq;
+        _this2.mod.connect(_this2.modGain);
+        _this2.mod.connect(_this2.carGain.gain);
 
-      this.mod.connect(this.modGain);
-      this.mod.connect(this.carGain.gain);
+        _this2.car.connect(_this2.carGain);
+        _this2.carGain.connect(_this2.masterGain);
+        _this2.masterGain.connect(_this2.spectro.analyserNode);
+        _this2.spectro.analyserNode.connect(_this2.audioCtx.destination);
 
-      this.car.connect(this.carGain);
-      this.carGain.connect(this.masterGain);
-      this.masterGain.connect(this.spectro.analyserNode);
-      this.spectro.analyserNode.connect(this.audioCtx.destination);
-
-      this.mod.start(0);
-      this.car.start(0);
+        _this2.mod.start(0);
+        _this2.car.start(0);
+      });
     }
   }, {
     key: 'stop',

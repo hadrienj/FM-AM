@@ -6,40 +6,31 @@ $(document).ready(function() {
 
 // Get the visual context to draw on the canvas
 var visualCtx = $("#canvas").get()[0].getContext("2d");
-const spectro;
-const audio;
 
-function init() {
-  // Compatibility browsers
-  let audioContext = window.AudioContext|| window.webkitAudioContext;
-  let audioCtx = new audioContext();
+// Compatibility browsers
+let audioContext = window.AudioContext|| window.webkitAudioContext;
+let audioCtx = new audioContext();
 
-  // Get values from inpu sliders
-  var carFreq = parseInt(document.getElementById('carFreq').value);
-  var modAmpl = parseInt(document.getElementById('modAmpl').value);
-  var modFreq = parseInt(document.getElementById('modFreq').value);
+// Get values from inpu sliders
+var carFreq = parseInt(document.getElementById('carFreq').value);
+var modAmpl = parseInt(document.getElementById('modAmpl').value);
+var modFreq = parseInt(document.getElementById('modFreq').value);
 
-  // Instanciate modules
-  var fftSize = 2048;
-  spectro = new Spectro({
-    audioCtx,
-    fftSize,
-    carFreq,
-    modAmpl,
-    modFreq,
-    visualCtx
-  });
-  audio = new Audio({ audioCtx, spectro });
-}
+// Instanciate modules
+var fftSize = 2048;
+const spectro = new Spectro({
+  audioCtx,
+  fftSize,
+  carFreq,
+  modAmpl,
+  modFreq,
+  visualCtx
+});
+var audio = new Audio({ audioCtx, spectro });
 
-var firstInteraction = true;
 
 // Define button actions
 $('#FM').on("click", function(e) {
-  if (firstInteraction) {
-    init();
-    firstInteraction = false;
-  }
   if (!spectro.play) {
     audio.FM();
     spectro.animate = requestAnimationFrame(()=>spectro.draw());
@@ -51,10 +42,6 @@ $('#FM').on("click", function(e) {
   }
 });
 $('#AM').on("click", function(e) {
-  if (firstInteraction) {
-    init();
-    firstInteraction = false;
-  }
   if (!spectro.play) {
     audio.AM();
     spectro.animate = requestAnimationFrame(()=>spectro.draw());
