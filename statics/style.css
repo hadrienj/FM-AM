@@ -6,18 +6,14 @@ body {
 }
 
 #canvas {
-  margin-top: 10%;
+    margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
     display: block;
     background-color: white;
     border-style: solid;
     border-color: #c4e8ee;
-<<<<<<< HEAD
-=======
     width: 100%;
-    height: 250px;
->>>>>>> master
 }
 .container {
   margin-top: 3%;
